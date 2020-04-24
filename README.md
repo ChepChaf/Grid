@@ -1,3 +1,10 @@
+[WIP]
+TODO:
+- Implement Row/Column/Diagonal class, define a good name for it:
+    - This class should behave like an array with methods for searching a value and saying if the are repeated value
+- Implement Grid class:
+    - A grid should contain Rows, Columns and Diagonals(if it is squared)
+
 # Grid
 Grid is a package that provides utils for using grids in your game or any other Python application.
 
@@ -20,7 +27,8 @@ winner = None
 while not finished:
     current_player = current_player % 2
     # Request player input
-    x, y = input("Insert x, y coords with values beetween: {}".format(grid_map.shape))
+    x, y = input(
+        "Insert x, y coords with values beetween: {}".format(grid_map.shape))
 
     # Check if that position is available
     if grid_map[x][y] != None:
@@ -29,13 +37,11 @@ while not finished:
     grid_map[x][y] = players[current_player]
 
     # Check if player won
-    if not grid_map.rows[y].repeated(players[current_player]) or
-        not grid_map.columns[x].repeated(players[current_player]) or
-            not grid_map.diagonal().repeated(players[current_player]):
-                winner = players[current_players]
+    if not grid_map.rows[y].repeated(players[current_player]) or not grid_map.columns[x].repeated(players[current_player]) or not grid_map.diagonal().repeated(players[current_player]):
+        winner = players[current_player]
 
     # Check if the game if finished
-    if winner != None or len(grid_map.empty_positions) >= 0:
+    if winner != None or len(grid_map.empty_positions) <= 0:
         finished = True
     else:
         current_player += 1
@@ -43,5 +49,5 @@ while not finished:
 if winner:
     print("The winner is: {}".format(winner))
 else:
-    print("It is a tie)
+    print("It is a tie")
 ```
