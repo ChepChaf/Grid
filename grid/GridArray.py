@@ -1,12 +1,19 @@
 from copy import copy
 
 class GridArray:
-    def __init__(self, elements=[]):
-        self.elements = copy(elements)
+    def __init__(self, n=0, elements=[]):
+        self.elements = []
+        if len(elements) > 0:
+            self.elements = copy(elements)
+        elif n > 0:
+            self.elements = [None for _ in range(n)]
 
     # We want this class to be subscriptable
     def __getitem__(self, i):
         return self.elements[i]
+
+    def __hash__(self):
+        return hash(str(self))
 
     def __sizeof__(self):
         return len(self.elements)
@@ -15,7 +22,7 @@ class GridArray:
         for el in self.elements:
             yield el
 
-    def __setitem__(self, index, value):
+    def set_value(self, index, value):
         self.elements[index] = value
 
     def __repr__(self):
@@ -27,7 +34,7 @@ class GridArray:
         return self.elements == other
 
     def is_empty(self):
-        return len(self.elements) == 0
+        return len(self.elements) == 0 or set(self.elements) == {None}
 
     def append(self, element):
         self.elements.append(element)
@@ -36,9 +43,12 @@ class GridArray:
         return len(self.elements) > len(set(self.elements))
 
     def repeated(self, value):
+        return self.repeated_count(value) > 1
+
+    def repeated_count(self, value):
         frequency = 0
         for el in self.elements:
             if el == value:
                 frequency += 1
 
-        return frequency > 1
+        return frequency
