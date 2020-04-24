@@ -17,11 +17,41 @@ class EmptyGrid(TestCase):
         for col in self.grid.columns:
             self.assertTrue(col.is_empty())
 
+    def test_emptyPositionCount(self):
+        self.assertEqual(self.grid.empty_positions(), 9)
+
+        self.grid.set_value(1, 1, 1)
+
+        self.assertEqual(self.grid.empty_positions(), 8)
+
+    def test_setValueByIndex(self):
+        self.grid.set_value(1, 1, 1)
+
+        self.assertEqual(self.grid.rows[1][1], 1)
+        self.assertEqual(self.grid.columns[1][1], 1)
+        self.assertEqual(self.grid.diagonals[0][1], 1)
+        self.assertEqual(self.grid.diagonals[1][1], 1)
+
+        self.grid.set_value(0, 1, 'X')
+
+        self.assertEqual(self.grid.rows[1][0], 'X')
+        self.assertEqual(self.grid.columns[0][1], 'X')
 
 class GridWithNonRepeatedValues(TestCase):
     def setUp(self):
         self.grid = Grid(3, 3)
         self.grid.set_values([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+    def test_getElementWithIndexes(self):
+        self.assertEqual(self.grid[0][0], 1)
+        self.assertEqual(self.grid[0][1], 4)
+        self.assertEqual(self.grid[0][2], 7)
+        self.assertEqual(self.grid[1][0], 2)
+        self.assertEqual(self.grid[1][1], 5)
+        self.assertEqual(self.grid[1][2], 8)
+        self.assertEqual(self.grid[2][0], 3)
+        self.assertEqual(self.grid[2][1], 6)
+        self.assertEqual(self.grid[2][2], 9)
 
     def test_rowsCountsAreCorrect(self):
         self.assertEqual(len(self.grid.rows.elements), 3)
@@ -100,3 +130,10 @@ class GridWithRepeatedValues(TestCase):
         self.assertFalse(self.grid.rows[1].repeated(4))
 
         self.assertTrue(self.grid.rows[2].repeated(4))
+
+    def test_repeatedCount(self):
+        self.assertEqual(self.grid.repeated_count(3), 2)
+        self.assertEqual(self.grid.repeated_count(1), 1)
+
+        self.assertEqual(self.grid.columns[2].repeated_count(4), 3)
+        self.assertEqual(self.grid.rows[1].repeated_count(3), 2)
