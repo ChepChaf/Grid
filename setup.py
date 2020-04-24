@@ -4,7 +4,7 @@ with open('README.md', 'r') as fh:
     long_description = fh.read()
 
 setup(
-    name='Grid',
+    name='game-grid',
     version='0.0.1',
     author='Cezar Azevedo de Faveri',
     description='Provides some utils to use grids mostly on games',
