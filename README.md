@@ -23,16 +23,16 @@ while not finished:
     x, y = input("Insert x, y coords with values beetween: {}".format(grid_map.shape))
 
     # Check if that position is available
-    if grid_map[x][y] == None:
+    if grid_map[x][y] != None:
         continue
 
     grid_map[x][y] = players[current_player]
 
     # Check if player won
-    if grid_map.rows[y].repeated(players[current_player]) or
-        grid_map.columns[x].repeated(players[current_player]) or
-            grid_map.diagonal().repeated(players[current_player]):
-            winner = players[current_players]
+    if not grid_map.rows[y].repeated(players[current_player]) or
+        not grid_map.columns[x].repeated(players[current_player]) or
+            not grid_map.diagonal().repeated(players[current_player]):
+                winner = players[current_players]
 
     # Check if the game if finished
     if winner != None or len(grid_map.empty_positions) >= 0:
