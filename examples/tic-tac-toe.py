@@ -1,17 +1,3 @@
-[WIP]
-TODO:
-- Implement Row/Column/Diagonal class, define a good name for it:
-    - This class should behave like an array with methods for searching a value and saying if the are repeated value
-- Implement Grid class:
-    - A grid should contain Rows, Columns and Diagonals(if it is squared)
-
-# Grid
-Grid is a package that provides utils for using grids in your game or any other Python application.
-
-## Examples
-
-TicTacToe:
-```
 from grid import Grid
 
 # Creates a 3x3 grid
@@ -52,5 +38,3 @@ if winner:
     print("The winner is: {}".format(winner))
 else:
     print("It is a tie")
-```
-[More Examples](https://github.com/ChepChaf/Grid/tree/master/examples)
